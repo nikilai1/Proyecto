@@ -1,57 +1,54 @@
+import React, { useEffect, useState } from "react";
 import { Image, Pressable, StyleSheet, Text, useWindowDimensions } from "react-native";
 import Card from "./Card";
-import {useState,useEffect} from"react";
 
-const ProductItem = ({ product, setProductDetailId }) => {
-const [isPrtrair, setItsPortrair] = useState (true);
-const [isLandscape, setisLandscape] = useState (false);
+const ProductItem = ({ product, navigation }) => {
   const { width, height } = useWindowDimensions();
+  const [isPortrait, setIsPortrait] = useState(height > width);
 
-  console.log(width, height);
-
-  useEffect (()=>
-  {
-    if (height>width){
-      setItsPortrair (true);
-      setisLandscape (false);
-    } else {
-      setItsPortrair (false);
-      setisLandscape (true);
-    }
-  },{width,height})
-
+  useEffect(() => {
+    setIsPortrait(height > width);
+  }, [width, height]);
 
   return (
-    <>
-      <Pressable onPress={() => setProductDetailId(product.id)}>
-        <Card
-          style={{
-            marginVertical: 20,
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <Text style={width < 400 ? styles.textMin : styles.text}>{product.title}</Text>
-          <Image style={styles.image} source={{ uri: product.images[0] }} />
-        </Card>
-      </Pressable>
-    </>
+    <Pressable style={styles.container} onPress={() => navigation.navigate("ItemDetail", { id: product.id })}>
+      <Card style={styles.card}>
+        <Text style={isPortrait ? styles.textPortrait : styles.textLandscape}>{product.title}</Text>
+        <Image style={styles.image} resizeMode="cover" source={{ uri: product.thumbnail }} />
+      </Card>
+    </Pressable>
   );
 };
 
-export default ProductItem;
-
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 20,
-    width: "70%",
+  container: {
+    marginVertical: 10,
+    paddingHorizontal: 10,
   },
-  textMin: {
+  card: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+  },
+  textPortrait: {
+    width: "60%",
+    fontSize: 16,
+    fontFamily: "InterRegular",
+  },
+  textLandscape: {
+    width: "40%",
     fontSize: 14,
-    width: "70%",
+    fontFamily: "InterRegular",
   },
   image: {
-    width: 70,
-    height: 70,
+    width: 80,
+    height: 80,
+    borderRadius: 5,
   },
 });
+
+export default ProductItem;

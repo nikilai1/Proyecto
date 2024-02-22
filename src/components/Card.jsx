@@ -1,9 +1,9 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 const Card = ({ children, style }) => {
   return (
-    <View style={{ ...styles.container, ...style }}>
+    <View style={[styles.container, style]}>
       {children}
     </View>
   );
@@ -11,19 +11,20 @@ const Card = ({ children, style }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#E0E5EC", 
-    borderRadius: 15,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 12,
     padding: 20,
     marginVertical: 10,
-    marginHorizontal: 20,
+    marginHorizontal: 16,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 2,
     },
     shadowOpacity: 0.2,
-    shadowRadius: 5,
+    shadowRadius: 3,
     elevation: 5,
   },
 });
+
 export default Card;

@@ -1,52 +1,61 @@
 import React, { useEffect, useState } from "react";
-import { View, FlatList, StyleSheet, Text, Pressable } from "react-native";
+import { View, FlatList, StyleSheet, Text, ActivityIndicator } from "react-native";
 import allProducts from "../data/products.json";
 import ProductItem from "../components/ProductItem";
 import Search from "../components/Search";
-import {colors} from "../global/colors"
+import { colors } from "../global/colors";
 
-function ItemListCategories({ category, setCategorySelected, setProductDetailId }) {
+const ItemListCategories = ({ navigation, route }) => {
   const [products, setProducts] = useState([]);
   const [keyword, setKeyword] = useState("");
 
+  const { category } = route.params;
+
   useEffect(() => {
-    const filteredProducts = allProducts.filter(product => {
-      return category ? product.category === category : true;
-    }).filter(product => {
-      return product.title.toLowerCase().includes(keyword.toLowerCase());
-    });
+    let filteredProducts = allProducts;
+    if (category) {
+      filteredProducts = filteredProducts.filter((product) => product.category === category);
+    }
+    filteredProducts = filteredProducts.filter((product) =>
+      product.title.toLowerCase().includes(keyword.toLowerCase())
+    );
     setProducts(filteredProducts);
   }, [category, keyword]);
 
+  if (products.length === 0) {
+    return (
+      <View style={styles.container}>
+        <Search onSearch={setKeyword} />
+        <ActivityIndicator style={styles.loader} size="large" color={colors.primary} />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <Pressable onPress={()=> setCategorySelected('')}>
-        <Text style={styles.homeLink}>Inicio</Text>
-      </Pressable>
       <Search onSearch={setKeyword} />
       <FlatList
         data={products}
-        renderItem={({ item }) => (
-          <ProductItem product={item} setProductDetailId={setProductDetailId} />
-        )}
-        keyExtractor={item => item.id}
-        contentContainerStyle={{ flexGrow: 1 }}
+        renderItem={({ item }) => <ProductItem product={item} navigation={navigation} />}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.flatListContainer}
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.blue_500,
     paddingHorizontal: 20,
     paddingTop: 20,
-    backgroundColor: "#c5d3e8",
   },
-  homeLink: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 10,
+  loader: {
+    marginTop: 20,
+  },
+  flatListContainer: {
+    paddingTop: 20,
   },
 });
 

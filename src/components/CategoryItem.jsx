@@ -1,22 +1,35 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import Card from "./Card";
+import { colors } from "../global/colors";
 
-const CategoryItem = ({ category, setCategorySelected }) => {
+const CategoryItem = ({ category, navigation }) => {
   return (
-    <Card style={{ marginVertical: 20 }}>
-      <Pressable onPress={() => setCategorySelected(category)}>
+    <Pressable onPress={() => navigation.navigate("ItemListCategories", {category})}>
+      <Card style={styles.cardContainer}>
         <Text style={styles.text}>{category}</Text>
-      </Pressable>
-    </Card>
+      </Card>
+    </Pressable>
   );
 };
 
-export default CategoryItem;
-
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 25,
-    fontFamily: 'InterRegular'
+  pressable: {
+    margin: 5,
+    borderRadius: 5,
+    overflow: 'hidden',
   },
- 
+  cardContainer: {
+    backgroundColor: colors.blue_100,
+    borderRadius: 5,
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 20,
+    fontFamily: 'InterRegular',
+    color: colors.black,
+  },
 });
+
+export default CategoryItem;
