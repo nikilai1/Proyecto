@@ -14,7 +14,7 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.blue_600,
+    backgroundColor: colors.blue_100,
     flex: 1,
     width: "100%",
     alignItems: "center",

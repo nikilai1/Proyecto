@@ -9,27 +9,19 @@ function Header({ title }) {
   );
 }
 
-
 export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    height: 80,
+    height: 50,
     width: "100%",
-    backgroundColor: colors.blue_400,
+    backgroundColor: colors.blue_300,
     justifyContent: "center",
     alignItems: "center",
-    borderBottomWidth: 2,
-    borderBottomColor: colors.primaryDark,
-    paddingTop: 40,
-    paddingHorizontal: 20,
-    elevation: 5,
   },
   text: {
+    textAlign: "center",
     color: "white",
-    fontSize: 24,
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    letterSpacing: 1,
+    fontSize: 20,
   },
 });

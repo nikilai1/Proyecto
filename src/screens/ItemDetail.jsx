@@ -1,81 +1,97 @@
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, Pressable, ActivityIndicator } from "react-native";
 import allProducts from "../data/products.json";
 import { colors } from "../global/colors";
+import { useDispatch } from "react-redux";
+import { addItem } from "../features/shop/cartSlice";
 
 const ItemDetail = ({ navigation, route }) => {
   const [product, setProduct] = useState(null);
 
   const { id } = route.params;
 
+  const dispatch = useDispatch()
+
+  const onAddCart = () => {
+    dispatch(addItem({...product, quantity: 1}))
+  }
+
   useEffect(() => {
     const productFinded = allProducts.find((product) => product.id === id);
     setProduct(productFinded);
   }, [id]);
 
-  if (!product) {
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" color={colors.primary} />
-      </View>
-    );
-  }
-
   return (
-    <View style={styles.container}>
-      <Image
-        source={{ uri: product.images[0] }}
-        style={styles.image}
-        resizeMode="cover"
-      />
-      <Text style={styles.title}>{product.title}</Text>
-      <Text style={styles.description}>{product.description}</Text>
-      <Text style={styles.price}>${product.price}</Text>
-      <Pressable style={styles.buy} onPress={() => {}}>
-        <Text style={styles.buyText}>Buy now</Text>
-      </Pressable>
+    <View style={styles.main}>
+      {product ? (
+        <View style={styles.container}>
+          <Image
+            source={{ uri: product.images[0] }}
+            style={styles.image}
+            resizeMode="cover"
+          />
+          <View style={styles.textContainer}>
+            <Text style={styles.descriptionText}>{product.title}</Text>
+            <Text style={styles.descriptionText}>{product.description}</Text>
+            <Text style={styles.descriptionTextPrice}>${product.price}</Text>
+            <Pressable style={styles.buy} onPress={onAddCart}>
+              <Text style={styles.buyText}>Add to cart</Text>
+            </Pressable>
+          </View>
+        </View>
+      ) : (
+        <View>
+          <Text>Cargando...</Text>
+        </View>
+      )}
     </View>
   );
 };
 
+export default ItemDetail;
+
 const styles = StyleSheet.create({
-  container: {
+  main: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    backgroundColor: '#E0E5EC',
+    width: "100%",
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
+  container: {
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    height: "100%",
   },
   image: {
-    width: 300,
-    height: 300,
-    marginBottom: 10,
+    width: "100%",
+    height: 400,
+    marginVertical: 15,
   },
-  description: {
+  textContainer: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    padding: 6,
+  },
+  descriptionText: {
+    fontFamily: "InterRegular",
     fontSize: 16,
-    marginBottom: 10,
+    color: "black",
+    paddingVertical: 4,
   },
-  price: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 20,
+  descriptionTextPrice: {
+    fontFamily: "InterRegular",
+    fontSize: 25,
+    color: "black",
+    paddingVertical: 6,
   },
   buy: {
-    backgroundColor: colors.primary,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
+    padding: 10,
+    borderRadius: 6,
+    backgroundColor: colors.blue_300,
   },
   buyText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: "InterBold",
+    fontSize: 22,
+    color: "white",
   },
 });
-
-export default ItemDetail;

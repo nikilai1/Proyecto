@@ -1,5 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import {colors} from "../global/colors"
+
 
 const Card = ({children, style}) => {
   return (
@@ -13,7 +15,7 @@ const Card = ({children, style}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.blue_200,
     borderRadius: 12,
     padding: 20,
     marginVertical: 10,

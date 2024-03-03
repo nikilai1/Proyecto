@@ -1,67 +1,77 @@
-import React, { useEffect, useState } from "react";
-import { Image, Pressable, StyleSheet, Text, useWindowDimensions } from "react-native";
+import React from "react";
+import { Image, Pressable, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import Card from "./Card";
+import { colors } from "../global/colors";
 
 const ProductItem = ({ product, navigation }) => {
-  const { width, height } = useWindowDimensions();
-  const isPortrait = height > width;
+  const { width } = useWindowDimensions();
+  const isSmallScreen = width < 350;
 
   return (
     <Pressable
-      style={[
-        styles.card,
-        isPortrait ? styles.cardPortrait : styles.cardLandscape,
-      ]}
+      style={styles.pressable}
       onPress={() => navigation.navigate("ItemDetail", { id: product.id })}
     >
-      <Card style={styles.cardContent}>
-        <Text style={isPortrait ? styles.textPortrait : styles.textLandscape}>
-          {product.title}
-        </Text>
-        <Image
-          style={styles.image}
-          resizeMode="cover"
-          source={{ uri: product.thumbnail }}
-        />
+      <Card style={styles.card}>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            resizeMode="cover"
+            source={{ uri: product.thumbnail }}
+          />
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={[styles.title, { fontSize: isSmallScreen ? 16 : 20 }]}>
+            {product.title}
+          </Text>
+          <Text style={styles.price}>{product.price}</Text>
+        </View>
       </Card>
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
-  card: {
-    marginVertical: 10,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#ccc",
+  pressable: {
+    paddingTop:30,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
   },
-  cardContent: {
+  card: {
+ 
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
-    padding: 10,
+    backgroundColor: colors.blue_100,
+    borderRadius: 10,
+    overflow: 'hidden',
   },
-  cardPortrait: {
-    flexDirection: "column",
+  title: {
+  
+    fontFamily: "InterRegular",
+    fontSize: 18,
+    color: "black",
+    marginBottom: 5,
   },
-  cardLandscape: {
-    flexDirection: "row",
-  },
-  textPortrait: {
-    width: "100%",
+  price: {
+    fontFamily: "InterRegular",
     fontSize: 16,
-    fontFamily: "InterRegular",
-    marginBottom: 10,
+    color: colors.blue_700,
   },
-  textLandscape: {
-    width: "70%",
-    fontSize: 14,
-    fontFamily: "InterRegular",
+  imageContainer: {
+    borderRadius: 10,
+    overflow: 'hidden',
+    marginRight: 10,
   },
   image: {
     width: 80,
     height: 80,
-    borderRadius: 5,
+    borderRadius: 4,
+  },
+  textContainer: {
+    
+    flex: 1,
+    justifyContent: "center",
+    paddingVertical: 10,
   },
 });
 

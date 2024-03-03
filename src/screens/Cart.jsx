@@ -1,43 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import allCartItems from "../data/cart.json";
+import React from "react";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import { useSelector } from "react-redux";
+import { usePostOrderMutation } from "../services/shopService";
 import CartItem from "../components/CartItem";
-import { FontAwesome } from '@expo/vector-icons';
-import { colors } from "../global/colors";
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([]);
-  const [total, setTotal] = useState(0);
+  const cartItems = useSelector((state) => state.cartReducer.value.items);
+  const total = useSelector((state) => state.cartReducer.value.total);
+  const [triggerPost, result] = usePostOrderMutation();
 
-  useEffect(() => {
-    const total = allCartItems.reduce((acc, currentItem) => acc + currentItem.quantity * currentItem.price, 0);
-    setTotal(total);
-    setCartItems(allCartItems);
-  }, []);
-
-  const handleDeleteItem = (itemId) => {
-    const updatedCartItems = cartItems.filter(item => item.id !== itemId);
-    setCartItems(updatedCartItems);
-    const newTotal = updatedCartItems.reduce((acc, currentItem) => acc + currentItem.quantity * currentItem.price, 0);
-    setTotal(newTotal);
+  const confirmCart = () => {
+    triggerPost({ total, cartItems, user: "loggedUser" });
   };
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={cartItems}
-        renderItem={({ item }) => (
-          <View style={styles.itemContainer}>
-            <CartItem item={item} />
-            <TouchableOpacity onPress={() => handleDeleteItem(item.id)} style={styles.deleteButton}>
-              <FontAwesome name="trash-o" size={20} color={colors.blue_500} />
-            </TouchableOpacity>
-          </View>
-        )}
-        keyExtractor={(cartItem) => cartItem.id.toString()}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
-      />
-      <Text style={styles.totalText}>Total: ${total.toFixed(2)}</Text>
+      {cartItems.length > 0 ? (
+        <>
+          <FlatList
+            data={cartItems}
+            renderItem={({ item }) => <CartItem item={item} />}
+            keyExtractor={(cartItem) => cartItem.id}
+          />
+          <Text style={styles.total}>Total: ${total}</Text>
+          <Pressable style={styles.button} onPress={confirmCart}>
+            <Text style={styles.buttonText}>Confirm</Text>
+          </Pressable>
+        </>
+      ) : (
+        <Text style={styles.emptyMessage}>No hay productos agregados</Text>
+      )}
     </View>
   );
 };
@@ -47,33 +39,29 @@ export default Cart;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.blue_50,
-    padding: 10,
+    padding: 16,
+    backgroundColor: "#fff",
   },
-  itemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderWidth: 1,
-    borderColor: colors.blue_200,
-    borderRadius: 5,
-    marginBottom: 10,
-    padding: 10,
-    backgroundColor: colors.blue_100,
-  },
-  deleteButton: {
-    padding: 5,
-  },
-  separator: {
-    height: 1,
-    backgroundColor: colors.blue_400,
-    marginVertical: 5,
-  },
-  totalText: {
-    textAlign: "right",
+  total: {
     fontSize: 18,
     fontWeight: "bold",
-    marginTop: 10,
-    color: colors.blue_900,
+    marginTop: 16,
+    textAlign: "center",
+  },
+  button: {
+    backgroundColor: "#007bff",
+    padding: 12,
+    borderRadius: 8,
+    marginTop: 16,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+  },
+  emptyMessage: {
+    fontSize: 16,
+    textAlign: "center",
+    marginTop: 16,
   },
 });
