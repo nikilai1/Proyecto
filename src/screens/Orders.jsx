@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import ordersData from "../data/orders.json";
+import ordersData from "../data/Orders.jsons";
 import OrderItem from "../components/OrderItem";
 import { FontAwesome } from '@expo/vector-icons';
 import { colors } from "../global/colors";

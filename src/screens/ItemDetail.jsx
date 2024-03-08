@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Pressable } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable, Animated } from "react-native";
 import React, { useEffect, useState } from "react";
 import allProducts from "../data/products.json";
 import { colors } from "../global/colors";
@@ -7,14 +7,26 @@ import { addItem } from "../features/shop/cartSlice";
 
 const ItemDetail = ({ navigation, route }) => {
   const [product, setProduct] = useState(null);
+  const [buttonAnim] = useState(new Animated.Value(1));
 
   const { id } = route.params;
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const onAddCart = () => {
-    dispatch(addItem({...product, quantity: 1}))
-  }
+    dispatch(addItem({ ...product, quantity: 1 }));
+    Animated.sequence([
+      Animated.timing(buttonAnim, {
+        toValue: 0.5,
+        duration: 100,
+        useNativeDriver: true,
+      }),
+      Animated.timing(buttonAnim, {
+        toValue: 1,
+        duration: 100,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
 
   useEffect(() => {
     const productFinded = allProducts.find((product) => product.id === id);
@@ -34,8 +46,21 @@ const ItemDetail = ({ navigation, route }) => {
             <Text style={styles.descriptionText}>{product.title}</Text>
             <Text style={styles.descriptionText}>{product.description}</Text>
             <Text style={styles.descriptionTextPrice}>${product.price}</Text>
-            <Pressable style={styles.buy} onPress={onAddCart}>
-              <Text style={styles.buyText}>Add to cart</Text>
+            <Pressable
+              style={({ pressed }) => [
+                styles.buy,
+                { opacity: pressed ? 0.5 : 1 },
+              ]}
+              onPress={onAddCart}
+            >
+              <Animated.View
+                style={[
+                  styles.buyContainer,
+                  { transform: [{ scale: buttonAnim }] },
+                ]}
+              >
+                <Text style={styles.buyText}>Add to cart</Text>
+              </Animated.View>
             </Pressable>
           </View>
         </View>
@@ -88,6 +113,11 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 6,
     backgroundColor: colors.blue_300,
+  },
+  buyContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   buyText: {
     fontFamily: "InterBold",
