@@ -28,12 +28,6 @@ export default InputForm;
 
 const styles = StyleSheet.create({
   inputContainer: {
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    width: "100%",
-  },
-  subtitle: {
     width: "90%",
     fontSize: 16,
     fontFamily: "InterRegular",

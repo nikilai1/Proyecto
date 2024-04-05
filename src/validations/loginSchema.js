@@ -1,4 +1,4 @@
-import { object, string, ref } from "yup";
+import { object, string} from "yup";
 
 export const loginSchema = object().shape({
   email: string().required("Email is required").email("Not a valid email"),

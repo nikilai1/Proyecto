@@ -18,15 +18,12 @@ const Signup = ({navigation}) => {
 
   const dispatch = useDispatch();
 
-  //console.log(result)
-
   const onSubmit = () => {
     console.log("mail", errorMail);
     console.log("password", errorPassword);
     console.log("confirmPassword", errorConfirmPassword);
 
     try {
-      //limpiamos los errores cada vez que ejecutamos el Register
       setErrorMail("");
       setErrorPassword("");
       setErrorConfirmPassword("");

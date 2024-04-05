@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Pressable, ActivityIndicator } from "react-native";
+import { Text, View, Pressable, ActivityIndicator } from "react-native";
 import InputForm from "../components/InputForm";
 import SubmitButton from "../components/SubmitButton";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
