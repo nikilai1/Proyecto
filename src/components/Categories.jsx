@@ -1,13 +1,12 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import CategoryItem from "./CategoryItem";
 import Counter from "./Counter";
-
 import { useGetCategoriesQuery } from "../services/shopService";
 
 function Categories({ navigation }) {
  
   const { data, isLoading, error } = useGetCategoriesQuery();
-
+  
   return (
     <View style={styles.container}>
       <Counter />

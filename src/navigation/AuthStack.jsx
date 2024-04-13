@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
 import { useLoginMutation } from "../services/authService";
 import { loginSchema } from "../validations/loginSchema";
+import Signup from "../screens/Singup";
 
 const Stack = createNativeStackNavigator();
 
@@ -70,7 +71,7 @@ const AuthStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Login" component={Login} />
-    
+      <Stack.Screen name="Signup" component={Signup} />
     </Stack.Navigator>
   );
 };
