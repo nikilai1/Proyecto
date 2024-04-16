@@ -2,11 +2,11 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 import CategoryItem from "./CategoryItem";
 import Counter from "./Counter";
 import { useGetCategoriesQuery } from "../services/shopService";
+import { colors } from "../global/colors";
 
 function Categories({ navigation }) {
- 
   const { data, isLoading, error } = useGetCategoriesQuery();
-  
+
   return (
     <View style={styles.container}>
       <Counter />
@@ -16,6 +16,7 @@ function Categories({ navigation }) {
           <CategoryItem navigation={navigation} category={item} />
         )}
         keyExtractor={(category) => category}
+        contentContainerStyle={styles.flatListContainer}
       />
     </View>
   );
@@ -27,5 +28,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
+    padding: 10,
+    backgroundColor: colors.blue_50,
+    
+  },
+  flatListContainer: {
+    marginTop: 10,
+    
   },
 });

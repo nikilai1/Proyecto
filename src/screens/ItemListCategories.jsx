@@ -4,6 +4,7 @@ import ProductItem from "../components/ProductItem";
 import Search from "../components/Search";
 import { useSelector } from "react-redux";
 import { useGetProductsByCategoryQuery } from "../services/shopService";
+import { colors } from "../global/colors";
 
 function ItemListCategories({ navigation }) {
   const [products, setProducts] = useState([]);
@@ -44,5 +45,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: colors.magenta_50,
   },
 });

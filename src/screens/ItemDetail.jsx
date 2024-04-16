@@ -49,7 +49,7 @@ const ItemDetail = ({ navigation, route }) => {
             <Pressable
               style={({ pressed }) => [
                 styles.buy,
-                { opacity: pressed ? 0.5 : 1 },
+                { backgroundColor: pressed ? colors.turquoise_700 : colors.turquoise_500 },
               ]}
               onPress={onAddCart}
             >
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   buy: {
     padding: 10,
     borderRadius: 6,
-    backgroundColor: colors.blue_300,
+    backgroundColor: colors.turquoise_100,
   },
   buyContainer: {
     flexDirection: "row",
@@ -125,3 +125,4 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
+

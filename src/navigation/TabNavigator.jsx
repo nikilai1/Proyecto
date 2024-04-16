@@ -24,8 +24,8 @@ const TabNavigator = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View style={styles.tabContainer}>
-                <Entypo name="shop" size={30} color={focused ? "black" : "grey"} />
-                <Text style={{ color: focused ? "black" : "grey" }}>Shop</Text>
+                <Entypo name="shop" size={30} color={focused ? colors.turquoise_600 : colors.turquoise_500} />
+                <Text style={{ color: focused ? colors.turquoise_600 : colors.turquoise_500 }}>Shop</Text>
               </View>
             );
           },
@@ -41,9 +41,9 @@ const TabNavigator = () => {
                 <AntDesign
                   name="shoppingcart"
                   size={30}
-                  color={focused ? "black" : "grey"}
+                  color={focused ? colors.turquoise_600 : colors.turquoise_500}
                 />
-                <Text style={{ color: focused ? "black" : "grey" }}>Cart</Text>
+                <Text style={{ color: focused ? colors.turquoise_600 : colors.turquoise_500 }}>Cart</Text>
               </View>
             );
           },
@@ -59,9 +59,9 @@ const TabNavigator = () => {
                 <FontAwesome
                   name="list-ul"
                   size={30}
-                  color={focused ? "black" : "grey"}
+                  color={focused ? colors.turquoise_600 : colors.turquoise_500}
                 />
-                <Text style={{ color: focused ? "black" : "grey" }}>Orders</Text>
+                <Text style={{ color: focused ? colors.turquoise_600 : colors.turquoise_500 }}>Orders</Text>
               </View>
             );
           },
@@ -77,9 +77,9 @@ const TabNavigator = () => {
                 <Ionicons
                   name="person-circle-outline"
                   size={30}
-                  color={focused ? "black" : "grey"}
+                  color={focused ? colors.turquoise_600 : colors.turquoise_500}
                 />
-                <Text style={{ color: focused ? "black" : "grey" }}>My profile</Text>
+                <Text style={{ color: focused ? colors.turquoise_600 : colors.turquoise_500 }}>My profile</Text>
               </View>
             );
           },
@@ -93,10 +93,11 @@ export default TabNavigator;
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: colors.blue_100,
+    backgroundColor: colors.magenta_300,
     height: 70,
   },
   tabContainer: {
+    
     justifyContent: "center",
     alignItems: "center",
   },

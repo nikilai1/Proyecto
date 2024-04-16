@@ -21,7 +21,7 @@ const Orders = () => {
           <View style={styles.itemContainer}>
             <OrderItem item={item} />
             <TouchableOpacity onPress={() => handleDeleteOrder(item.id)} style={styles.deleteButton}>
-              <FontAwesome name="trash-o" size={20} color={colors.blue_500} />
+              <FontAwesome name="trash-o" size={20} color={colors.magenta_500} />
             </TouchableOpacity>
           </View>
         )}
@@ -37,7 +37,7 @@ export default Orders;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.blue_50,
+    backgroundColor: colors.turquoise_50, // Fondo turquesa claro
     padding: 10,
   },
   itemContainer: {
@@ -45,18 +45,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     borderWidth: 1,
-    borderColor: colors.blue_200,
+    borderColor: colors.turquoise_200, // Borde turquesa claro
     borderRadius: 5,
     marginBottom: 10,
     padding: 10,
-    backgroundColor: colors.blue_100,
+    backgroundColor: colors.turquoise_100, // Fondo turquesa más oscuro
   },
   deleteButton: {
     padding: 5,
   },
   separator: {
     height: 1,
-    backgroundColor: colors.blue_400,
+    backgroundColor: colors.turquoise_400, // Separador turquesa medio
     marginVertical: 5,
   },
 });

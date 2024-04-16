@@ -6,8 +6,9 @@ import SubmitButton from "../components/SubmitButton";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
 import { signupSchema } from "../validations/signupSchema";
+import { colors } from "../global/colors";
 
-const Signup = ({navigation}) => {
+const Signup = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [errorMail, setErrorMail] = useState("");
   const [password, setPassword] = useState("");
@@ -56,8 +57,8 @@ const Signup = ({navigation}) => {
   }, [result]);
 
   return (
-    <View>
-      <Text>Register</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Register</Text>
       <InputForm label={"Email"} error={errorMail} onChange={setEmail} />
       <InputForm
         label={"Password"}
@@ -72,7 +73,7 @@ const Signup = ({navigation}) => {
         isSecure={true}
       />
       <Pressable onPress={() => navigation.navigate("Login")}>
-        <Text>Ir al login</Text>
+        <Text style={styles.linkText}>Ir al login</Text>
       </Pressable>
       <SubmitButton title={"Register"} onPress={onSubmit} />
     </View>
@@ -81,4 +82,22 @@ const Signup = ({navigation}) => {
 
 export default Signup;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.turquoise_50,
+    padding: 20,
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+    color: colors.magenta_700,
+  },
+  linkText: {
+    color: colors.turquoise_800,
+    textDecorationLine: "underline",
+    marginBottom: 20,
+  },
+});

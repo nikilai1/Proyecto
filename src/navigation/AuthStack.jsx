@@ -22,7 +22,7 @@ const Login = ({ navigation }) => {
   useEffect(() => {
     if (result.data) {
       dispatch(setUser(result.data));
-    }
+    } 
   }, [result, dispatch]);
 
   const onSubmit = () => {

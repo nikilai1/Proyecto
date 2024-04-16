@@ -1,5 +1,5 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { colors } from "../global/colors";
 import { useSelector } from "react-redux";
 
@@ -27,13 +27,13 @@ const MyProfile = ({ navigation }) => {
         style={styles.button}
         onPress={() => navigation.navigate("Image Selector")}
       >
-        <Text style={styles.text}>Add profile picture</Text>
+        <Text style={styles.text}>Agregar foto de perfil</Text>
       </Pressable>
       <Pressable
         style={styles.button}
         onPress={() => navigation.navigate("Location Selector")}
       >
-        <Text style={styles.text}>My addresses</Text>
+        <Text style={styles.text}>Mis direcciones</Text>
       </Pressable>
     </View>
   );
@@ -47,6 +47,8 @@ const styles = StyleSheet.create({
     gap: 15,
     alignItems: "center",
     justifyContent: "flex-start",
+    backgroundColor: colors.turquoise_50,
+    flex: 1,
   },
   image: {
     width: 100,
@@ -55,10 +57,11 @@ const styles = StyleSheet.create({
   button: {
     width: "80%",
     elevation: 10,
-    backgroundColor: colors.blue_400,
+    backgroundColor: colors.magenta_400,
     justifyContent: "center",
     alignItems: "center",
     padding: 8,
+    borderRadius: 5,
   },
   text: {
     fontFamily: "InterRegular",

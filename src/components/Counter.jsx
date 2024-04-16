@@ -6,20 +6,21 @@ import {
   reset,
 } from "../features/counter/counterSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { colors } from "../global/colors";
 
 const Counter = () => {
   const count = useSelector((state) => state.counterReducer.value);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.container}>
       <View style={styles.buttonsContainer}>
-        <Pressable  onPress={()=> dispatch(decrement())} style={styles.button}>
+        <Pressable onPress={() => dispatch(decrement())} style={styles.button}>
           <Text style={styles.buttonText}>-</Text>
         </Pressable>
-        <Text>{count}</Text>
-        <Pressable onPress={()=> dispatch(increment())} style={styles.button}>
+        <Text style={styles.count}>{count}</Text>
+        <Pressable onPress={() => dispatch(increment())} style={styles.button}>
           <Text style={styles.buttonText}>+</Text>
         </Pressable>
       </View>
@@ -46,25 +47,18 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 10,
-    backgroundColor: "gray",
+    backgroundColor: colors.turquoise_100,
+    borderRadius: 5,
+    marginHorizontal: 5,
   },
-  span: {
-    width: "43%",
-    padding: 10,
-    textAlign: "center",
+  count: {
     fontSize: 20,
-    fontFamily: "InterRegular",
-  },
-  spanInput: {
-    width: "43%",
-    padding: 10,
-    textAlign: "center",
-    fontSize: 16,
-    fontFamily: "InterRegular",
+    fontFamily: "InterBold",
+    marginHorizontal: 10,
   },
   buttonText: {
     fontSize: 18,
     fontFamily: "InterRegular",
-    color: "white",
+    color: colors.blue_900,
   },
 });

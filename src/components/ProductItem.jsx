@@ -24,7 +24,7 @@ const ProductItem = ({ product, navigation }) => {
           <Text style={[styles.title, { fontSize: isSmallScreen ? 16 : 20 }]}>
             {product.title}
           </Text>
-          <Text style={styles.price}>{product.price}</Text>
+          <Text style={styles.price}>${product.price}</Text>
         </View>
       </Card>
     </Pressable>
@@ -33,12 +33,9 @@ const ProductItem = ({ product, navigation }) => {
 
 const styles = StyleSheet.create({
   pressable: {
-    paddingTop:30,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    padding: 10,
   },
   card: {
- 
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: colors.blue_100,
@@ -46,16 +43,15 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   title: {
-  
     fontFamily: "InterRegular",
     fontSize: 18,
-    color: "black",
+    color: colors.magenta_700,
     marginBottom: 5,
   },
   price: {
     fontFamily: "InterRegular",
     fontSize: 16,
-    color: colors.blue_700,
+    color: colors.turquoise_700,
   },
   imageContainer: {
     borderRadius: 10,
@@ -68,7 +64,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   textContainer: {
-    
     flex: 1,
     justifyContent: "center",
     paddingVertical: 10,

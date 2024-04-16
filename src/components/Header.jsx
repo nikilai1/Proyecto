@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../features/auth/authSlice";
 import { deleteSession } from "../db";
 
-function Header({ title }) {
+function OtherComponent({ title }) {
   const { localId, user } = useSelector((state) => state.authReducer.value);
   const dispatch = useDispatch();
 
@@ -27,13 +27,13 @@ function Header({ title }) {
   );
 }
 
-export default Header;
+export default OtherComponent;
 
 const styles = StyleSheet.create({
   container: {
     height: 50,
     width: "100%",
-    backgroundColor: colors.blue_300,
+    backgroundColor: colors.magenta_700,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
   },
- logoutIcon: {
+  logoutIcon: {
     position: "absolute",
-   right: 10,
+    right: 10,
   },
 });

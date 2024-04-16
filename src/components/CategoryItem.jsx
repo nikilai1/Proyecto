@@ -5,12 +5,19 @@ import { useDispatch } from "react-redux";
 import { setCategorySelected } from "../features/shop/shopSlice";
 
 const CategoryItem = ({ category, navigation }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <Pressable
+      style={({ pressed }) => [
+        styles.pressable,
+        {
+          backgroundColor: pressed ? colors.turquoise_700 : colors.turquoise_500,
+          borderColor: colors.magenta_800,
+        },
+      ]}
       onPress={() => {
-        dispatch(setCategorySelected(category))
+        dispatch(setCategorySelected(category));
         navigation.navigate("ItemListCategories", { category });
       }}
     >
@@ -24,17 +31,23 @@ const CategoryItem = ({ category, navigation }) => {
 export default CategoryItem;
 
 const styles = StyleSheet.create({
+  pressable: {
+    borderRadius: 10,
+    overflow: "scroll",
+    borderWidth: 2,
+    elevation: 5,
+  },
   cardContainer: {
     marginHorizontal: 30,
     marginVertical: 10,
     padding: 10,
     justifyContent: "center",
-    alignItems: "flex-start",
-    backgroundColor: colors.blue_200,
-    borderRadius: 10,
+    alignItems: "center",
+    backgroundColor: colors.turquoise_100,
   },
   text: {
     fontFamily: "InterBold",
     fontSize: 20,
+    color: colors.magenta_800, 
   },
 });

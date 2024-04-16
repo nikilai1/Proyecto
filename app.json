@@ -23,10 +23,14 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.tu.paquete"
-    }
-  ,
+    },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "885670b9-b1f4-483e-a26e-2fc315b0d580"
+      }
     }
   }
 }
